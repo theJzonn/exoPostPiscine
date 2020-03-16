@@ -1,3 +1,5 @@
+/** clang -Wall -Werror -Wextra ft_print_combn.c && ./a.out */
+
 #include <stdio.h>
 
 void	ft_print_combn(int n);

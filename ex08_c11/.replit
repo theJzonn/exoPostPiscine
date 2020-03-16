@@ -1,0 +1,2 @@
+language = "c"
+run = "clang -Wall -Werror -Wextra ft_print_combn.c && ./a.out"
