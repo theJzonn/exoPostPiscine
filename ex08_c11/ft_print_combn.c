@@ -21,10 +21,11 @@ void	ft_putstr(char *str)
 void	ft_up_str(char *start, char *end, int size)
 {
 	int		i;
+	int		index;
 	char 	res[size];
 
 	i = 0;
-	(void)start;
+	index = size - 1;
 	(void)end;
 	while (start[i])
 	{
@@ -32,21 +33,32 @@ void	ft_up_str(char *start, char *end, int size)
 		i++;
 	}
 	res[i] = '\0';
-	ft_putstr(res);
-	ft_putstr(", ");
-	/** while (res[0] < (10 - size) + 48) **/
-	while (res[0] != '9')
+	//ft_putstr(res);
+	//ft_putstr(", ");
+	/** while (res[0] != '9') **/
+	while (res[0] != (10 - size) + 48)
 	{
-		i = 0;
+		ft_putstr(res);
+		ft_putstr(", ");
+		while (res[size - 1] < '9')
+		{
+			res[size - 1]++;
+			ft_putstr(res);
+			if (res[0] != (10 - size) + 48)
+				ft_putstr(", ");
+		}
+		if (index != 0)
+			index--;
+		res[index]++;
+		i = index + 1;
 		while (i < size)
 		{
-			res[i] = res[i] + 1;
+			res[i] = res[i - 1] + 1;
 			i++;
 		}
-		ft_putstr(res);
-		if (res[0] != (10 - size) + 48)
-			ft_putstr(", ");
+		ft_putchar('\n');
 	}
+	ft_putstr(res);
 }
 
 void	ft_print_combn(int n)
