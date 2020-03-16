@@ -1,11 +1,6 @@
 #include <unistd.h>
 #include <stdio.h>
 
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
 void	ft_putstr(char *str)
 {
 	int i;
@@ -13,17 +8,17 @@ void	ft_putstr(char *str)
 	i = 0;
 	while (str[i])
 	{
-		ft_putchar(str[i]);
+		write(1, &str[i], 1);
 		i++;
 	}
 }
 
 void	affiche(char *res, int size)
 {
-	while (res[size - 1] < '9')
+	while (res[size - 1] <= '9')
 	{
-		res[size - 1]++;
 		ft_putstr(res);
+		res[size - 1]++;
 		if (res[0] != (10 - size) + 48)
 			ft_putstr(", ");
 	}
@@ -37,41 +32,32 @@ void	ft_up_str(char *start, char *end, int size)
 
 	i = 0;
 	index = size - 1;
-	(void)end;
+	//(void)end;
 	while (start[i])
 	{
 		res[i] = start[i];
 		i++;
 	}
 	res[i] = '\0';
-	ft_putstr(res);
-	ft_putstr(", ");
+	affiche(res, size);
+	ft_putstr("\n");
 
 	while (res[0] != (10 - size) + 48)
 	{
-		if (index != 0)
-			index--;
+		index--;
 		while (res[index] != end[index])
 		{
-			affiche(res, size);
-			ft_putchar('\n');
 			res[index]++;
 			i = index + 1;
-			while (i < size)
+			while (res[i])
 			{
 				res[i] = res[i - 1] + 1;
 				i++;
 			}
-			ft_putstr(res);
-			ft_putstr(", ");
+			affiche(res, size);
+			ft_putstr("\n");
 		}
-		while (i < size)
-		{
-			res[i] = res[i - 1] + 1;
-			i++;
-		}	
 	}
-	ft_putstr(res);
 }
 
 void	ft_print_combn(int n)
@@ -94,7 +80,7 @@ void	ft_print_combn(int n)
 	while (n < size)
 		nb_debut[n++] = i++ + 48;
 	nb_debut[size] = '\0';
-	printf("str init : %s\n", nb_debut);
+	//printf("str init : %s\n", nb_debut);
 	ft_up_str(nb_debut, nb_max, size);
 }
 
@@ -102,6 +88,6 @@ int		main(int ac, char **av)
 {
 	(void)ac;
 	ft_print_combn(av[1][0] - 48);
-	ft_putchar('\n');
+	ft_putstr("\n");
 	return (0);
 }
