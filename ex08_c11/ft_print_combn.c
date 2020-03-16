@@ -29,21 +29,25 @@ void	ft_print_combn(int n)
 	int		i;
 	int		size;
 	char	nb_max[n];
-	//char 	str[n];
+	char 	str[n];
 
 	i = 9;
 	size = n;
+	/** get nb max **/
 	while (n)
-	{
-		--n;
-		printf("n: %d\n", n);
-		nb_max[n] = i-- + 48;
-	}
+		nb_max[--n] = i-- + 48;
 	nb_max[size] = '\0';
 	printf("max char : %s\n", nb_max);
+	printf("n: %d\n", n);
+	/** init str **/
+	i = 0;
+	while (n < size)
+		str[n++] = i++ + 48;
+	str[size] = '\0';
+	printf("str init : %s\n", str);
+
 	/**
-	str[n] = '\0';
-	while (i < 9)
+	while (str[0] <= (10 - n))
 	{
 		ft_putstr(ft_remlpir_str(str, size, i++));
 		if (i < 9)
