@@ -18,6 +18,17 @@ void	ft_putstr(char *str)
 	}
 }
 
+void	affiche(char *res, int size)
+{
+	while (res[size - 1] < '9')
+	{
+		res[size - 1]++;
+		ft_putstr(res);
+		if (res[0] != (10 - size) + 48)
+			ft_putstr(", ");
+	}
+}
+
 void	ft_up_str(char *start, char *end, int size)
 {
 	int		i;
@@ -33,30 +44,32 @@ void	ft_up_str(char *start, char *end, int size)
 		i++;
 	}
 	res[i] = '\0';
-	//ft_putstr(res);
-	//ft_putstr(", ");
-	/** while (res[0] != '9') **/
+	ft_putstr(res);
+	ft_putstr(", ");
+
 	while (res[0] != (10 - size) + 48)
 	{
-		ft_putstr(res);
-		ft_putstr(", ");
-		while (res[size - 1] < '9')
-		{
-			res[size - 1]++;
-			ft_putstr(res);
-			if (res[0] != (10 - size) + 48)
-				ft_putstr(", ");
-		}
 		if (index != 0)
 			index--;
-		res[index]++;
-		i = index + 1;
+		while (res[index] != end[index])
+		{
+			affiche(res, size);
+			ft_putchar('\n');
+			res[index]++;
+			i = index + 1;
+			while (i < size)
+			{
+				res[i] = res[i - 1] + 1;
+				i++;
+			}
+			ft_putstr(res);
+			ft_putstr(", ");
+		}
 		while (i < size)
 		{
 			res[i] = res[i - 1] + 1;
 			i++;
-		}
-		ft_putchar('\n');
+		}	
 	}
 	ft_putstr(res);
 }
