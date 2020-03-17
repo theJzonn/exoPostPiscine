@@ -19,7 +19,8 @@ void	affiche(char *res, int size)
 	{
 		ft_putstr(res);
 		res[size - 1]++;
-		if (res[0] <= (10 - size) + 48)
+		if (res[0] < (10 - size) + 48
+			|| (size == 1 && res[size - 1] == '9'))
 			ft_putstr(", ");
 	}
 }
@@ -31,18 +32,19 @@ void	ft_up_str(char *start, char *end, int size)
 	char 	res[size];
 
 	i = 0;
-	index = size - 1;
-	(void)end;
+	index = size - 2;
 	while (start[i])
 	{
 		res[i] = start[i];
 		i++;
 	}
 	res[i] = '\0';
+	affiche(res, size);
 	while (res[0] != (10 - size) + 48)
 	{
-		index--;
-		while (res[index] != end[index])
+		if (res[index] == end[index])
+			index--;
+		while (res[index] < end[index])
 		{
 			affiche(res, size);
 			res[index]++;
@@ -55,7 +57,7 @@ void	ft_up_str(char *start, char *end, int size)
 			ft_putstr("\n");
 		}
 	}
-	ft_putstr(res);
+	ft_putstr(end);
 }
 
 void	ft_print_combn(int n)
