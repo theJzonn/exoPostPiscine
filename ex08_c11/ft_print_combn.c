@@ -53,9 +53,9 @@ void	ft_up_str(char *start, char *end, int size)
 				i++;
 			}
 			ft_putstr("\n");
-			ft_putstr(res);
 		}
 	}
+	ft_putstr(res);
 }
 
 void	ft_print_combn(int n)
