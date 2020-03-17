@@ -19,7 +19,7 @@ void	affiche(char *res, int size)
 	{
 		ft_putstr(res);
 		res[size - 1]++;
-		if (res[0] != (10 - size) + 48)
+		if (res[0] <= (10 - size) + 48)
 			ft_putstr(", ");
 	}
 }
@@ -32,21 +32,19 @@ void	ft_up_str(char *start, char *end, int size)
 
 	i = 0;
 	index = size - 1;
-	//(void)end;
+	(void)end;
 	while (start[i])
 	{
 		res[i] = start[i];
 		i++;
 	}
 	res[i] = '\0';
-	affiche(res, size);
-	ft_putstr("\n");
-
 	while (res[0] != (10 - size) + 48)
 	{
 		index--;
 		while (res[index] != end[index])
 		{
+			affiche(res, size);
 			res[index]++;
 			i = index + 1;
 			while (res[i])
@@ -54,8 +52,8 @@ void	ft_up_str(char *start, char *end, int size)
 				res[i] = res[i - 1] + 1;
 				i++;
 			}
-			affiche(res, size);
 			ft_putstr("\n");
+			ft_putstr(res);
 		}
 	}
 }
@@ -73,15 +71,15 @@ void	ft_print_combn(int n)
 	while (n)
 		nb_max[--n] = i-- + 48;
 	nb_max[size] = '\0';
-	printf("max char : %s\n", nb_max);
-	printf("n: %d\n", n);
 	/** init nb **/
 	i = 0;
 	while (n < size)
 		nb_debut[n++] = i++ + 48;
 	nb_debut[size] = '\0';
-	//printf("str init : %s\n", nb_debut);
-	ft_up_str(nb_debut, nb_max, size);
+	if (size > 0 && size < 10)
+		affiche(nb_debut, size);
+	if (size > 1 && size < 10)
+		ft_up_str(nb_debut, nb_max, size);
 }
 
 int		main(int ac, char **av)
