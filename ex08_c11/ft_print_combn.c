@@ -39,13 +39,19 @@ void	ft_up_str(char *start, char *end, int size)
 		i++;
 	}
 	res[i] = '\0';
-	affiche(res, size);
+	affiche(start, size);
 	while (res[0] != (10 - size) + 48)
 	{
-		if (res[index] == end[index])
-			index--;
-		while (res[index] < end[index])
+		if (index != 0 && (res[index] == end[index]))
 		{
+			if (res[index] == end[index] && res[index - 1] < end[index -1])
+				res[index - 1]++;
+			else
+				index--;
+		}
+		/**while (res[index] < end[index])
+		{**/
+			printf("index: %d\n", index);
 			affiche(res, size);
 			res[index]++;
 			i = index + 1;
@@ -55,7 +61,7 @@ void	ft_up_str(char *start, char *end, int size)
 				i++;
 			}
 			ft_putstr("\n");
-		}
+		//}
 	}
 	ft_putstr(end);
 }
