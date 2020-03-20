@@ -88,16 +88,7 @@ void	ft_print_combn(int n)
 	while (n < size)
 		nb_debut[n++] = i++ + 48;
 	nb_debut[size] = '\0';
-	/**if (size > 0 && size < 10)
-		affiche(nb_debut, size);**/
+	/**if (size > 0 && size < 10) affiche(nb_debut, size);**/
 	if (size > 1 && size < 10)
 		ft_up_str(nb_debut, nb_max, size);
-}
-
-int		main(int ac, char **av)
-{
-	(void)ac;
-	ft_print_combn(av[1][0] - 48);
-	ft_putstr("\n");
-	return (0);
 }
