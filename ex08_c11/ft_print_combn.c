@@ -13,55 +13,59 @@ void	ft_putstr(char *str)
 	}
 }
 
-void	affiche(char *res, int size)
+void	affiche(char *res, char *end, int index, int size)
 {
-	while (res[size - 1] <= '9')
+	int i;
+
+	while (res[index] < end[index])
+	{
+		while (res[size - 1] <= '9')
+		{
+			ft_putstr(res);
+			res[size - 1]++;
+			if (res[0] < (10 - size) + 48
+				|| (size == 1 && res[size - 1] == '9'))
+				ft_putstr(", ");
+		}
+		res[index]++;
+		i = index + 1;
+		while (res[i])
+		{
+			res[i] = res[i - 1] + 1;
+			i++;
+		}
+		ft_putstr("\n");
+	}
+	if (res[0] != end[0])
 	{
 		ft_putstr(res);
-		res[size - 1]++;
-		if (res[0] < (10 - size) + 48
-			|| (size == 1 && res[size - 1] == '9'))
-			ft_putstr(", ");
+		ft_putstr(", ");
 	}
+	ft_putstr("\n");
 }
 
-void	ft_up_str(char *start, char *end, int size)
+void	ft_up_str(char *res, char *end, int size)
 {
 	int		i;
 	int		index;
-	char 	res[size];
 
 	i = 0;
-	index = size - 2;
-	while (start[i])
+	index = size - 1;
+	while (index > 0)
 	{
-		res[i] = start[i];
-		i++;
-	}
-	res[i] = '\0';
-	affiche(start, size);
-	while (res[0] != (10 - size) + 48)
-	{
-		if (index != 0 && (res[index] == end[index]))
+		if (index == size - 1 || res[index] == end[index])
+			index--;
+		affiche(res, end, index, size);
+		index--;
+		res[index]++;
+		i = index + 1;
+		while (res[i])
 		{
-			if (res[index] == end[index] && res[index - 1] < end[index -1])
-				res[index - 1]++;
-			else
-				index--;
+			res[i] = res[i - 1] + 1;
+			i++;
 		}
-		/**while (res[index] < end[index])
-		{**/
-			printf("index: %d\n", index);
-			affiche(res, size);
-			res[index]++;
-			i = index + 1;
-			while (res[i])
-			{
-				res[i] = res[i - 1] + 1;
-				i++;
-			}
-			ft_putstr("\n");
-		//}
+		if (res[index + 1] != end[index + 1])
+			index++;
 	}
 	ft_putstr(end);
 }
@@ -84,8 +88,8 @@ void	ft_print_combn(int n)
 	while (n < size)
 		nb_debut[n++] = i++ + 48;
 	nb_debut[size] = '\0';
-	if (size > 0 && size < 10)
-		affiche(nb_debut, size);
+	/**if (size > 0 && size < 10)
+		affiche(nb_debut, size);**/
 	if (size > 1 && size < 10)
 		ft_up_str(nb_debut, nb_max, size);
 }
