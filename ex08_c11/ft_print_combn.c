@@ -62,12 +62,15 @@ void	ft_up_str(char *res, char *end, int size)
 			index--;
 		affiche(res, end, index, size);
 		index--;
-		res[index]++;
-		i = index + 1;
-		while (res[i])
+		if (index > 0)
 		{
-			res[i] = res[i - 1] + 1;
-			i++;
+			res[index]++;
+			i = index + 1;
+			while (res[i])
+			{
+				res[i] = res[i - 1] + 1;
+				i++;
+			}
 		}
 		if (res[index + 1] != end[index + 1])
 			index++;
