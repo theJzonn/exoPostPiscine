@@ -13,20 +13,25 @@ void	ft_putstr(char *str)
 	}
 }
 
+void	affiche_ligne(char *res, int size)
+{
+	while (res[size - 1] <= '9')
+	{
+		ft_putstr(res);
+		res[size - 1]++;
+		if (res[0] < (10 - size) + 48
+			|| (size == 1 && res[size - 1] == '9'))
+			ft_putstr(", ");
+	}
+}
+
 void	affiche(char *res, char *end, int index, int size)
 {
 	int i;
 
 	while (res[index] < end[index])
 	{
-		while (res[size - 1] <= '9')
-		{
-			ft_putstr(res);
-			res[size - 1]++;
-			if (res[0] < (10 - size) + 48
-				|| (size == 1 && res[size - 1] == '9'))
-				ft_putstr(", ");
-		}
+		affiche_ligne(res, size);
 		res[index]++;
 		i = index + 1;
 		while (res[i])
@@ -89,6 +94,13 @@ void	ft_print_combn(int n)
 		nb_debut[n++] = i++ + 48;
 	nb_debut[size] = '\0';
 	/**if (size > 0 && size < 10) affiche(nb_debut, size);**/
-	if (size > 1 && size < 10)
+	if (size == 1)
+		affiche_ligne(nb_debut, size);
+	if (size == 2)
+	{
+		affiche(nb_debut, nb_max, 0, size);
+		ft_putstr(nb_max);
+	}
+	if (size > 2 && size < 10)
 		ft_up_str(nb_debut, nb_max, size);
 }
